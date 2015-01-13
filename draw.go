@@ -84,7 +84,7 @@ func DrawTextFormatBar(width int64) DrawTextFormatFunc {
 		return fmt.Sprintf(
 			"[%s%s]",
 			strings.Repeat("=", int(current)),
-			strings.Repeat(" ", int(width - current)))
+			strings.Repeat(" ", int(width-current)))
 	}
 }
 
@@ -92,12 +92,12 @@ func byteUnitStr(n int64) string {
 	var unit string
 	size := float64(n)
 	for i := 1; i < len(byteUnits); i++ {
-		if size < 1000 {
+		if size < 1024 {
 			unit = byteUnits[i-1]
 			break
 		}
 
-		size = size / 1000
+		size = size / 1024
 	}
 
 	return fmt.Sprintf("%.3g %s", size, unit)
