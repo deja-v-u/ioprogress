@@ -51,8 +51,6 @@ func (r *Reader) Read(p []byte) (int, error) {
 		}
 	}
 	if err == io.EOF {
-		// Draw the total data at finish
-		r.drawProgress()
 		r.finishProgress()
 	}
 
@@ -85,6 +83,8 @@ func (r *Reader) finishProgress() {
 	// Only output the final draw if we drawed prior
 	if !r.lastDraw.IsZero() {
 		f := r.drawFunc()
+		// draw the total at finsh
+		f(r.progress, r.Size)
 		f(-1, -1)
 
 		// Reset lastDraw so we don't finish again
