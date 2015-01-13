@@ -51,6 +51,8 @@ func (r *Reader) Read(p []byte) (int, error) {
 		}
 	}
 	if err == io.EOF {
+		// Draw the total data at finish
+		r.drawProgress()
 		r.finishProgress()
 	}
 
